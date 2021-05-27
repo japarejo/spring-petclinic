@@ -66,3 +66,9 @@ _site/
 .metadata/.plugins/org.eclipse.ui.intro/introstate
 .metadata/.plugins/org.eclipse.ui.workbench/dialog_settings.xml
 .metadata/.plugins/org.eclipse.ui.workbench/workingsets.xml
+
+*.class
+
+spring-petclinic-monolith/target/classes/
+
+spring-petclinic-monolith/target/.wro4j/
