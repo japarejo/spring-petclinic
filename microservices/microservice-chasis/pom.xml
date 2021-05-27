@@ -12,7 +12,7 @@
 	<name>microservice-chasis</name>
 	<description>Chasis for the creation of microservices in our architecure</description>
 	<properties>
-		<spring-doc.version>1.5.2</spring-doc.version>
+		<springdoc.version>1.5.2</springdoc.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -26,7 +26,7 @@
 		<dependency>
     		<groupId>org.springdoc</groupId>
     		<artifactId>springdoc-openapi-ui</artifactId>
-    		<version>${spring-doc.version}</version>
+    		<version>${springdoc.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

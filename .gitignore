@@ -69,6 +69,4 @@ _site/
 
 *.class
 
-spring-petclinic-monolith/target/classes/
-
-spring-petclinic-monolith/target/.wro4j/
+spring-petclinic-monolith/target/
