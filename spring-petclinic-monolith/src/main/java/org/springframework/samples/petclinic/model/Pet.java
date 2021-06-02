@@ -35,6 +35,7 @@ import org.springframework.beans.support.MutableSortDefinition;
 import org.springframework.beans.support.PropertyComparator;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
@@ -50,14 +51,19 @@ public class Pet extends NamedEntity {
 
 	@Column(name = "birth_date")        
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd")
 	private LocalDate birthDate;
 
 	@ManyToOne
 	@JoinColumn(name = "type_id")
+	//@JsonSerialize(using = PetTypeSerializer.class)
+	//@JsonDeserialize(using = PetTypeDeserializer.class)
 	private PetType type;
 
 	@ManyToOne
 	@JoinColumn(name = "owner_id")
+	//@JsonSerialize(using = BaseEntitySerializer.class)
+	//@JsonDeserialize(using = BaseEntityDeserializer.class)
 	private Owner owner;
 
 	@JsonIgnore
