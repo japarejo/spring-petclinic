@@ -54,7 +54,7 @@
                         <dt>Birth Date</dt>
                         <dd><petclinic:localDate date="${pet.birthDate}" pattern="yyyy-MM-dd"/></dd>
                         <dt>Type</dt>
-                        <dd><c:out value="${pet.type.name}"/></dd>
+                        <dd><c:out value="${pet.type}"/></dd>
                     </dl>
                 </td>
                 <td valign="top">
