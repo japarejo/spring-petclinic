@@ -128,7 +128,7 @@
 	</modules>
 	<repositories>
 		<repository>
-			<id>spring-snapshots</id>
+			<id>spring-releases</id>
 			<name>Spring Releases</name>
 			<url>https://repo.spring.io/release</url>
 			<snapshots>
