@@ -10,10 +10,8 @@ import javax.validation.constraints.Size;
 
 import org.springframework.samples.petclinic.service.businessrules.ValidatePossibleDisease;
 
-import lombok.Data;
 
 @Entity
-@Data
 @Table(name="diagnoses")
 @ValidatePossibleDisease
 public class Diagnose extends BaseEntity{
@@ -29,4 +27,36 @@ public class Diagnose extends BaseEntity{
 	
 	@ManyToOne(optional = false)
 	private Vet vet;
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Visit getVisit() {
+		return visit;
+	}
+
+	public void setVisit(Visit visit) {
+		this.visit = visit;
+	}
+
+	public Disease getDisease() {
+		return disease;
+	}
+
+	public void setDisease(Disease disease) {
+		this.disease = disease;
+	}
+
+	public Vet getVet() {
+		return vet;
+	}
+
+	public void setVet(Vet vet) {
+		this.vet = vet;
+	}
 }
