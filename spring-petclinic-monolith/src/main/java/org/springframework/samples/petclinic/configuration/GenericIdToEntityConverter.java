@@ -47,13 +47,17 @@ public final class GenericIdToEntityConverter implements ConditionalGenericConve
         }
 
         Integer id = (Integer) this.conversionService.convert(source, sourceType, TypeDescriptor.valueOf(Integer.class));
-
-        Object entity = entityManager.find(targetType.getType(), id);
+        Object entity=convert(id,targetType.getType());
         if (entity == null) {
             log.info("Did not find an entity with id {} of type {}", id,  targetType.getType());
             return null;
         }
-
+        return entity;
+        
+    }
+    
+    public Object convert(Integer id, Class<?> type) {
+    	Object entity = entityManager.find(type, id);        
         return entity;
     }
 

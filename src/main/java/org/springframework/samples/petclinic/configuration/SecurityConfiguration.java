@@ -34,16 +34,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 				.antMatchers("/resources/**","/webjars/**","/h2-console/**").permitAll()
+				.antMatchers("/api/**").permitAll()
 				.antMatchers(HttpMethod.GET, "/","/oups").permitAll()
 				.antMatchers("/users/new").permitAll()
-				.antMatchers("/logging", "/actuator/**").permitAll()
 				.antMatchers("/admin/**").hasAnyAuthority("admin")
 				.antMatchers("/owners/**").hasAnyAuthority("owner","admin")				
 				.antMatchers("/vets/**").authenticated()
-				.antMatchers("/payments/**").authenticated()
-				.antMatchers("/bills/**").authenticated()
-				.antMatchers("/api/**").permitAll()
-				.anyRequest().denyAll()
+				//.anyRequest().denyAll() //Commented out for showing 404 custom error handling 
 				.and()
 				 	.formLogin()
 				 	/*.loginPage("/login")*/
@@ -55,7 +52,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 // de la BD H2 (deshabilitar las cabeceras de protección contra
                 // ataques de tipo csrf y habilitar los framesets si su contenido
                 // se sirve desde esta misma página.
-                http.csrf().ignoringAntMatchers("/h2-console/**","/actuator/**","/api/**");
+                http.csrf().ignoringAntMatchers("/h2-console/**","/api/**");
                 http.headers().frameOptions().sameOrigin();
 	}
 
