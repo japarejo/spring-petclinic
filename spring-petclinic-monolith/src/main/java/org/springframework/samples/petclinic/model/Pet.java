@@ -34,9 +34,15 @@ import javax.persistence.Table;
 import org.springframework.beans.support.MutableSortDefinition;
 import org.springframework.beans.support.PropertyComparator;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.samples.petclinic.web.api.BaseEntityDeserializer;
+import org.springframework.samples.petclinic.web.api.BaseEntitySerializer;
+import org.springframework.samples.petclinic.web.api.PetTypeDeserializer;
+import org.springframework.samples.petclinic.web.api.PetTypeSerializer;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /**
  * Simple business object representing a pet.
@@ -56,14 +62,14 @@ public class Pet extends NamedEntity {
 
 	@ManyToOne
 	@JoinColumn(name = "type_id")
-	//@JsonSerialize(using = PetTypeSerializer.class)
-	//@JsonDeserialize(using = PetTypeDeserializer.class)
+	@JsonSerialize(using = PetTypeSerializer.class)
+	@JsonDeserialize(using = PetTypeDeserializer.class)
 	private PetType type;
 
 	@ManyToOne
 	@JoinColumn(name = "owner_id")
-	//@JsonSerialize(using = BaseEntitySerializer.class)
-	//@JsonDeserialize(using = BaseEntityDeserializer.class)
+	@JsonSerialize(using = BaseEntitySerializer.class)
+	@JsonDeserialize(using = BaseEntityDeserializer.class)
 	private Owner owner;
 
 	@JsonIgnore

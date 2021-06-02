@@ -8,6 +8,11 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
+import org.springframework.samples.petclinic.web.api.BaseEntityDeserializer;
+import org.springframework.samples.petclinic.web.api.BaseEntitySerializer;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 
 @Audited
@@ -16,6 +21,8 @@ public class Bill extends BaseEntity{
 	
 	@OneToOne
 	@NotAudited
+	@JsonSerialize(using = BaseEntitySerializer.class)
+	@JsonDeserialize(using = BaseEntityDeserializer.class)
 	Visit visit;
 	
 	@Min(0)
