@@ -51,6 +51,11 @@ public class PetService {
 	}
 
 	@Transactional(readOnly = true)
+	public Collection<Pet> findAllPets() throws DataAccessException {
+		return petRepository.findAll();	}
+
+	
+	@Transactional(readOnly = true)
 	public Collection<PetType> findPetTypes() throws DataAccessException {
 		return petRepository.findPetTypes();
 	}
@@ -77,6 +82,10 @@ public class PetService {
 
 	public Collection<Visit> findVisitsByPetId(int petId) {
 		return visitRepository.findByPetId(petId);
+	}
+
+	public void deletePet(int id) {
+		petRepository.deleteById(id);		
 	}
 		
 

@@ -2,10 +2,12 @@ package org.springframework.samples.petclinic.model;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
-import org.hibernate.envers.RevisionEntity;
 
 
 @Audited
@@ -16,8 +18,10 @@ public class Bill extends BaseEntity{
 	@NotAudited
 	Visit visit;
 	
+	@Min(0)
 	double amount;
 	
+	@NotEmpty
 	String concept;
 
 	public Visit getVisit() {
