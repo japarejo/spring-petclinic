@@ -1,4 +1,4 @@
-package org.springframework.samples.petclinic.web.api;
+package org.springframework.samples.microservicechasis.restcontrollers;
 
 import java.net.URI;
 import java.util.List;
@@ -10,8 +10,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.samples.petclinic.model.Bill;
-import org.springframework.samples.petclinic.service.BillService;
+import org.springframework.samples.microservicechasis.model.Bill;
+import org.springframework.samples.microservicechasis.services.BillService;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;

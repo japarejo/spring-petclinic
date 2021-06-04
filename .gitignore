@@ -74,3 +74,5 @@ spring-petclinic-monolith/target/
 *.log
 
 microservices/target/classes/META-INF/build-info.properties
+
+microservices/bills-microservice/.mvn/wrapper/

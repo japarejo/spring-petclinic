@@ -1,9 +1,10 @@
-package org.springframework.samples.petclinic.repository;
+package org.springframework.samples.microservicechasis.repositories;
 
 import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.samples.petclinic.model.Bill;
+import org.springframework.samples.microservicechasis.model.Bill;
+
 
 public interface BillRepository extends CrudRepository<Bill,Integer> {
 

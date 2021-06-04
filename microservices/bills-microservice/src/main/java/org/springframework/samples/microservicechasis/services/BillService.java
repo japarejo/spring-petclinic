@@ -1,11 +1,11 @@
-package org.springframework.samples.petclinic.service;
+package org.springframework.samples.microservicechasis.services;
 
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.samples.petclinic.model.Bill;
-import org.springframework.samples.petclinic.repository.BillRepository;
+import org.springframework.samples.microservicechasis.model.Bill;
+import org.springframework.samples.microservicechasis.repositories.BillRepository;
 import org.springframework.stereotype.Service;
 
 @Service
