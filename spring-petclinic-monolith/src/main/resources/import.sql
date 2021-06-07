@@ -71,6 +71,3 @@ INSERT INTO DISEASES_PET_TYPESWITH_PREVALENCE(DISEASE_ID,PET_TYPESWITH_PREVALENC
 
 INSERT INTO diagnoses(id,version,visit_id,disease_id,vet_id,description) VALUES (1,1,1,2,2,'La mascota presenta problemas de vista y comportamiento extraño. El dueño afirma alimentarlo regularmente con dulces y chucherías :-S.');
 INSERT INTO diagnoses(id,version,visit_id,disease_id,vet_id,description) VALUES (2,1,2,1,1,'La mascota presenta fiebre, pérdida de apetito, y dificultad respiratoria.');
-
-INSERT INTO bill(id,version,visit_id,amount,concept) VALUES(1,1,1,39.99,'Revisión rutinaria');
-INSERT INTO bill(id,version,visit_id,amount,concept) VALUES(2,1,2,59.99,'Desparasitación');
