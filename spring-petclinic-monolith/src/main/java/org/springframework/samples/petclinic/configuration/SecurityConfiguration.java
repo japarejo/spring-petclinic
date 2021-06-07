@@ -6,13 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.samples.petclinic.util.JwtRequestFilter;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -30,33 +32,44 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Autowired
 	DataSource dataSource;
 	
+	@Autowired
+	private JwtRequestFilter jwtRequestFilter;	
+	
 	@Override
-	protected void configure(HttpSecurity http) throws Exception {
+	protected void configure(HttpSecurity http) throws Exception {		
 		http.authorizeRequests()
 				.antMatchers("/resources/**","/webjars/**","/h2-console/**").permitAll()
 				.antMatchers(HttpMethod.GET, "/","/oups").permitAll()
 				.antMatchers("/users/new").permitAll()
+				.antMatchers("/authenticate").permitAll()
 				.antMatchers("/logging", "/actuator/**").permitAll()
 				.antMatchers("/admin/**").hasAnyAuthority("admin")
 				.antMatchers("/owners/**").hasAnyAuthority("owner","admin")				
 				.antMatchers("/vets/**").authenticated()
 				.antMatchers("/payments/**").authenticated()
 				.antMatchers("/bills/**").authenticated()
-				.antMatchers("/api/**").permitAll()
-				.anyRequest().denyAll()
+				.antMatchers("/api/**").authenticated()
+				.anyRequest().denyAll()				
 				.and()
 				 	.formLogin()
 				 	/*.loginPage("/login")*/
 				 	.failureUrl("/login-error")
 				.and()
 					.logout()
-						.logoutSuccessUrl("/"); 
+						.logoutSuccessUrl("/")
+				.and()
+					.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+		
+				
+				
                 // Configuración para que funcione la consola de administración 
                 // de la BD H2 (deshabilitar las cabeceras de protección contra
                 // ataques de tipo csrf y habilitar los framesets si su contenido
                 // se sirve desde esta misma página.
-                http.csrf().ignoringAntMatchers("/h2-console/**","/actuator/**","/api/**");
+                http.csrf().ignoringAntMatchers("/h2-console/**","/actuator/**","/api/**","/authenticate");
                 http.headers().frameOptions().sameOrigin();
+                
+                
 	}
 
 	@Override
@@ -78,6 +91,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	public PasswordEncoder passwordEncoder() {	    
 		PasswordEncoder encoder =  NoOpPasswordEncoder.getInstance();
 	    return encoder;
+	}
+	
+	@Bean
+	@Override
+	public AuthenticationManager authenticationManagerBean() throws Exception {
+		return super.authenticationManagerBean();
 	}
 	
 }
