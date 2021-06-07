@@ -28,7 +28,10 @@ public class BaseEntityDeserializer<T extends BaseEntity> extends JsonDeserializ
 	@Override
 	public T deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {		
 		int id=p.getIntValue();
-		return (T)converter.convert(id,targetClass);
+		if(converter!=null)
+			return (T)converter.convert(id,targetClass);
+		else
+			return null;
 	}
 
 	@Override
