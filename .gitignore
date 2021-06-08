@@ -78,3 +78,7 @@ microservices/target/classes/META-INF/build-info.properties
 microservices/bills-microservice/.mvn/wrapper/
 
 microservices/configuration-server/.mvn/wrapper/
+
+microservices/bills-microservice/.settings/
+
+microservices/configuration-server/.settings/
