@@ -48,6 +48,9 @@ public class BillAPIController {
 		Optional<Bill> bill=billService.findById(billId);
 		if(!bill.isPresent())
 			throw new ResourceNotFoundException("Bill with ID '"+billId+"' not found!");
+		double result=0;
+		for(int i=0;i<10000000;i++)
+			result+=Math.random();
 		return bill.get();		
 	}
 	

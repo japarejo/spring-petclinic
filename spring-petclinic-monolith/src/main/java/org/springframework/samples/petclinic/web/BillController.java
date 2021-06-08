@@ -1,9 +1,9 @@
 package org.springframework.samples.petclinic.web;
 
-import javax.websocket.server.PathParam;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.samples.petclinic.apiclients.BillClient;
 import org.springframework.samples.petclinic.model.Bill;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,8 +15,11 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class BillController {
 
+	@Autowired
+	BillClient billsClient;
+	
 	 @GetMapping("/bills")
-	 public ModelAndView allBills() {
+	 public ModelAndView allBillsWithRestTemplate() {
 		 Bill[] bills=new Bill[0];
 		 ModelAndView result=new ModelAndView("bills/listing");
 		 RestTemplate restTemplate = new RestTemplate();
@@ -32,22 +35,29 @@ public class BillController {
 		 return result;
 	 }
 	 
+	 @GetMapping("/bills/withFeign")
+	 public ModelAndView allBillsWithFeign() {		 
+		 ModelAndView result=new ModelAndView("bills/listing");		 
+		 result.addObject("bills",billsClient.getBills());		 
+		 return result;
+	 }
+	 
+	 
 	  @GetMapping("/bills/delete/{id}")
-	  public ModelAndView deleteBill(@PathVariable("id") Integer id) {			 			
+	  public ModelAndView deleteBillwithRestTemplate(@PathVariable("id") Integer id) {			 			
 			 RestTemplate restTemplate = new RestTemplate();
 			 String resourceUrl
 			   = "http://localhost:8095/api/v1/bills/"+id;
 			 ModelAndView result=null;
 			 try {
 			 restTemplate.delete(resourceUrl);
-			 result=allBills();
+			 result=allBillsWithRestTemplate();
 			 }catch(HttpClientErrorException exception) {
 				 if(exception.getRawStatusCode()==HttpStatus.NOT_FOUND.value()) {
-					 result=allBills();
+					 result=allBillsWithRestTemplate();
 					 result.addObject("message","Unable to delete bill with id='"+id+"', not found!");
 				 }				 
-			 }
-			 
+			 }			 
 			 return result;
 		 }
 }
