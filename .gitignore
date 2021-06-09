@@ -82,3 +82,5 @@ microservices/configuration-server/.mvn/wrapper/
 microservices/bills-microservice/.settings/
 
 microservices/configuration-server/.settings/
+
+microservices/configuration-server/target/

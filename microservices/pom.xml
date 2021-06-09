@@ -16,6 +16,8 @@
 	<modules>
 		<module>registry</module>
 		<module>bills-microservice</module>
+		<module>configuration-server</module>
+		<module>gateway</module>
 		<module>microservice-chasis</module>
 	</modules>
 </project>
