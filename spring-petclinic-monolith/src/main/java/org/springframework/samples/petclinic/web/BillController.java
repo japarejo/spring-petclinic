@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.samples.petclinic.apiclients.BillClient;
 import org.springframework.samples.petclinic.model.Bill;
+import org.springframework.samples.petclinic.service.BillService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,20 +19,14 @@ public class BillController {
 	@Autowired
 	BillClient billsClient;
 	
+	@Autowired
+	BillService billService;
+	
 	 @GetMapping("/bills")
 	 public ModelAndView allBillsWithRestTemplate() {
-		 Bill[] bills=new Bill[0];
-		 ModelAndView result=new ModelAndView("bills/listing");
-		 RestTemplate restTemplate = new RestTemplate();
-		 String resourceUrl
-		   = "http://localhost:8095/api/v1/bills";
-		 /*ResponseEntity<String> response
-		   = restTemplate.getForEntity(resourceUrl, String.class);*/
-		 ResponseEntity<Bill[]> response
-		   = restTemplate.getForEntity(resourceUrl, Bill[].class);
-		 bills=response.getBody();
-		 result.addObject("bills",bills);
-		 System.out.println(response.getBody());
+		 
+		 ModelAndView result=new ModelAndView("bills/listing");		 
+		 result.addObject("bills",billService.getAllBills());		 
 		 return result;
 	 }
 	 

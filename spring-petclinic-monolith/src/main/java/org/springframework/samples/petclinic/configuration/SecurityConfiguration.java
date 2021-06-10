@@ -43,6 +43,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/payments/**").authenticated()
 				.antMatchers("/bills/**").authenticated()
 				.antMatchers("/api/**").permitAll()
+				.antMatchers("/hystrix**").permitAll()
 				.anyRequest().denyAll()
 				.and()
 				 	.formLogin()
