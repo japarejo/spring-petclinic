@@ -21,8 +21,7 @@ public class BillService {
 	public List<Bill> getAllBills(){
 		Bill[] bills=new Bill[0];		 
 		 RestTemplate restTemplate = new RestTemplate();
-		 String resourceUrl
-		   = "http://localhost:8095/api/v1/bills";
+		 String resourceUrl	   = "http://localhost:8095/api/v1/bills";
 		 ResponseEntity<Bill[]> response
 		   = restTemplate.getForEntity(resourceUrl, Bill[].class);
 		 bills=response.getBody();

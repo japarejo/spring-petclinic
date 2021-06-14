@@ -21,30 +21,30 @@ public class BillApiClientTest {
 
 	@Test
 	public void testSequentialCalls() {		
-		List<Bill> bills=new ArrayList<Bill>();
+		/*List<Bill> bills=new ArrayList<Bill>();
 		RestTemplate restTemplate=new RestTemplate();		
 		String resourceUrl
 		   = "http://localhost:8095/api/v1/bills/";
 		 /*ResponseEntity<String> response
-		   = restTemplate.getForEntity(resourceUrl, String.class);*/
+		   = restTemplate.getForEntity(resourceUrl, String.class);
 				
 		List<Integer>ids=new ArrayList<Integer>();
 		for(int i=0;i<calls;i++)
 			ids.add(i%2+1);
 		long start=System.currentTimeMillis();
 		fetchUsersSequentially(ids).collectList().block();
-		System.out.println("Sequential execution time "+(System.currentTimeMillis()-start));
+		System.out.println("Sequential execution time "+(System.currentTimeMillis()-start));*/
 	}
 	
 	@Test
 	public void testParallelCalls() {		
-		List<Bill> bills;
+		/*List<Bill> bills;
 		
 		List<Integer>ids=new ArrayList<Integer>();
 		for(int i=0;i<calls;i++)
 			ids.add(i%2+1);
 		long start=System.currentTimeMillis();
-		fetchUsersInParallel(ids).collectList().doFinally((e)->System.out.println("Parallel execution time "+(System.currentTimeMillis()-start)));								
+		fetchUsersInParallel(ids).collectList().doFinally((e)->System.out.println("Parallel execution time "+(System.currentTimeMillis()-start)));*/								
 	}
 
 	public Mono<Bill> getBills(Integer id){
