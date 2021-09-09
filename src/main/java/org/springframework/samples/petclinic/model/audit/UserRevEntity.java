@@ -6,9 +6,6 @@ import javax.persistence.Entity;
 import org.hibernate.envers.DefaultRevisionEntity;
 import org.hibernate.envers.RevisionEntity;
 
-import lombok.Data;
-
-
 @Entity
 @RevisionEntity(UserRevisionListener.class)
 public class UserRevEntity extends DefaultRevisionEntity{	  	

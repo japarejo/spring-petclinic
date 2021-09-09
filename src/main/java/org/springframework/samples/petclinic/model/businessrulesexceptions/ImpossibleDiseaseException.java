@@ -1,9 +1,5 @@
 package org.springframework.samples.petclinic.model.businessrulesexceptions;
 
-import lombok.Data;
-import lombok.Getter;
-
-@Getter
 public class ImpossibleDiseaseException extends Exception {
 	
 	private String disease;
@@ -14,4 +10,14 @@ public class ImpossibleDiseaseException extends Exception {
 		this.disease=disease;
 		this.petType=petType;
 	}
+
+	public String getDisease() {
+		return disease;
+	}
+
+	public String getPetType() {
+		return petType;
+	}
+	
+	
 }
