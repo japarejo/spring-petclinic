@@ -54,6 +54,18 @@
             <groupId>org.springframework.security</groupId>  
             <artifactId>spring-security-taglibs</artifactId>  
         </dependency>
+        <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-integration</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.integration</groupId>
+			<artifactId>spring-integration-feed</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.integration</groupId>
+			<artifactId>spring-integration-file</artifactId>
+		</dependency>
         <!-- Databases - Uses H2 by default -->
         <!-- dependency>
                 <groupId>org.hsqldb</groupId>
