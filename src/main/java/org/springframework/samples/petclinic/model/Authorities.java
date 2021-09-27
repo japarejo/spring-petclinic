@@ -6,9 +6,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
-import lombok.Data;
 
-@Data
+
 @Entity
 @Table(name = "authorities")
 public class Authorities extends BaseEntity{
@@ -16,9 +15,27 @@ public class Authorities extends BaseEntity{
 	@ManyToOne
 	@JoinColumn(name = "username")
 	User user;
-	
+
 	@Size(min = 3, max = 50)
 	String authority;
+	
+	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public String getAuthority() {
+		return authority;
+	}
+
+	public void setAuthority(String authority) {
+		this.authority = authority;
+	}
+
 	
 	
 }

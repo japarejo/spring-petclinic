@@ -9,10 +9,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-import lombok.Data;
 
 @Entity
-@Data
 @Table(name = "diseases")
 public class Disease extends NamedEntity{
 	@Size(min = 10, max = 1024)
@@ -22,4 +20,22 @@ public class Disease extends NamedEntity{
 	@NotEmpty
 	@ManyToMany
 	Set<PetType> petTypeswithPrevalence;
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Set<PetType> getPetTypeswithPrevalence() {
+		return petTypeswithPrevalence;
+	}
+
+	public void setPetTypeswithPrevalence(Set<PetType> petTypeswithPrevalence) {
+		this.petTypeswithPrevalence = petTypeswithPrevalence;
+	}
+	
+	
 }
