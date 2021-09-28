@@ -34,8 +34,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 				.antMatchers("/resources/**","/webjars/**","/h2-console/**").permitAll()
+				.antMatchers("/bills","/bills/**").permitAll()
 				.antMatchers(HttpMethod.GET, "/","/oups").permitAll()
 				.antMatchers("/users/new").permitAll()
+				.antMatchers("/api/**").permitAll()
 				.antMatchers("/admin/**").hasAnyAuthority("admin")
 				.antMatchers("/owners/**").hasAnyAuthority("owner","admin")				
 				.antMatchers("/vets/**").authenticated()
@@ -51,7 +53,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 // de la BD H2 (deshabilitar las cabeceras de protección contra
                 // ataques de tipo csrf y habilitar los framesets si su contenido
                 // se sirve desde esta misma página.
-                http.csrf().ignoringAntMatchers("/h2-console/**");
+                http.csrf().ignoringAntMatchers("/h2-console/**","/bills/**");
                 http.headers().frameOptions().sameOrigin();
 	}
 
