@@ -31,4 +31,9 @@ public class BillService {
 			result=b.get();
 		return result;
 	}
+
+
+	public void delete(Integer id) {
+		billRepo.deleteById(id);		
+	}
 }

@@ -93,6 +93,17 @@
             <artifactId>tomcat-embed-jasper</artifactId>
             <scope>provided</scope>
         </dependency>
+        <!-- OpenAPI -->
+        <dependency>
+			<groupId>org.springdoc</groupId> 
+			<artifactId>springdoc-openapi-core</artifactId>			
+			<version>1.1.44</version>
+		</dependency>
+        <dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>1.1.44</version>
+		</dependency>
         <!-- WebJars -->
         <dependency>
             <groupId>org.webjars</groupId>

@@ -59,4 +59,10 @@ public class BillController {
 		return m;
 	}
 	
+	@GetMapping("/bills/delete/{id}")
+	public ModelAndView deleteBill(@PathVariable("id") Integer id) {
+		billService.delete(id);
+		return showAllBills();
+	}
+	
 }
