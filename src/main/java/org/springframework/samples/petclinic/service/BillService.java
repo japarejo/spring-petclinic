@@ -29,5 +29,9 @@ public class BillService {
 			result=b.get();
 		return result;
 	}
+
+	public void deleteById(Integer id) {
+		br.deleteById(id);		
+	}
 	
 }
