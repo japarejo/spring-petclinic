@@ -71,3 +71,6 @@ INSERT INTO DISEASES_PET_TYPESWITH_PREVALENCE(DISEASE_ID,PET_TYPESWITH_PREVALENC
 
 INSERT INTO diagnoses(id,version,visit_id,disease_id,vet_id,description) VALUES (1,1,1,2,2,'La mascota presenta problemas de vista y comportamiento extraño. El dueño afirma alimentarlo regularmente con dulces y chucherías :-S.');
 INSERT INTO diagnoses(id,version,visit_id,disease_id,vet_id,description) VALUES (2,1,2,1,1,'La mascota presenta fiebre, pérdida de apetito, y dificultad respiratoria.');
+
+INSERT INTO bill(id,version,concept,amount,visit_id) VALUES (1,1,'Vacuna de la Rabia',30,1);
+INSERT INTO bill(id,version,concept,amount,visit_id) VALUES (2,1,'Collar antipulgas',20,3);

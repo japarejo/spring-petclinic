@@ -1,11 +1,13 @@
 package org.springframework.samples.petclinic.model;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Positive;
 
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
-import org.hibernate.envers.RevisionEntity;
 
 
 
@@ -16,10 +18,13 @@ public class Bill extends BaseEntity{
 	
 	@OneToOne
 	@NotAudited
+	@JoinColumn(name="visit_id")
 	Visit visit;
 	
+	@Positive
 	double amount;
 	
+	@NotEmpty
 	String concept;
 
 	public Visit getVisit() {
