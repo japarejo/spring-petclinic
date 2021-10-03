@@ -31,7 +31,7 @@ import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
 @RequestMapping("/api/bills")
-public class BillAPIController {
+public class BillAPIController implements BillApi {
 	
 	@Autowired
 	BillService billService;		
@@ -39,12 +39,14 @@ public class BillAPIController {
 	@Autowired
 	VisitService visitService;
 	
+	@Override
 	@Operation(tags = {"Bill"})
 	@GetMapping
 	public List<Bill> findAll(){
 		return billService.findAll();
 	}
 	
+	@Override
 	@Operation(tags = {"Bill"})
 	@GetMapping(value = "/{id}")
 	public Bill findById(@PathVariable("id") Integer id){
@@ -54,6 +56,7 @@ public class BillAPIController {
 		return result;
 	}
 	
+	@Override
 	@Operation(tags = {"Bill"})
 	@PostMapping(consumes = "application/json")
 	@ResponseStatus(code = HttpStatus.CREATED)
@@ -75,6 +78,7 @@ public class BillAPIController {
                 .toUri();
 		return ResponseEntity.created(uri).body(newBill);
 	}
+	@Override
 	@Operation(tags = {"Bill"})
 	@PutMapping("/{id}")
 	public void updateBill(@PathVariable("id") Integer id,@RequestBody @Valid Bill newBill, BindingResult br) {
@@ -88,6 +92,7 @@ public class BillAPIController {
 	}
 	
 	
+	@Override
 	@Operation(summary = "This method deletes bills, take good care!",tags = {"Bill"})
 	@DeleteMapping("/{id}")
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)

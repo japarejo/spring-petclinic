@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.samples.petclinic.model.Planet;
 import org.springframework.samples.petclinic.web.PlanetListing;
+import org.springframework.samples.petclinic.web.api.client.StarwarsAPIFeign;
 
 @SpringBootTest	
 public class StarwarRestAPITestWithFeign {

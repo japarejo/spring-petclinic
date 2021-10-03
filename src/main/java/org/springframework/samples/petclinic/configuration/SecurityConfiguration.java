@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.samples.petclinic.filters.JwtRequestFilter;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -13,6 +15,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -27,6 +30,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+	@Autowired
+	private JwtRequestFilter jwtRequestFilter;
+
+	
 	@Autowired
 	DataSource dataSource;
 	
@@ -58,6 +65,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 // se sirve desde esta misma página.
                 http.csrf().ignoringAntMatchers("/h2-console/**","/actuator/**","/api/**");
                 http.headers().frameOptions().sameOrigin();
+                
+                http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 	}
 
 	@Override
@@ -81,6 +90,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	    return encoder;
 	}
 	
+	
+	@Bean
+	@Override
+	public AuthenticationManager authenticationManagerBean() throws Exception {
+		return super.authenticationManagerBean();
+	}
 }
 
 

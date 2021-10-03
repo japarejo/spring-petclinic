@@ -1,4 +1,4 @@
-package org.springframework.samples.petclinic.web.api;
+package org.springframework.samples.petclinic.web.api.client;
 
 import java.util.List;
 
