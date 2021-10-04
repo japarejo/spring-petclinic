@@ -12,9 +12,9 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.Http403ForbiddenEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /*
@@ -30,7 +30,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-	@Autowired
+	@Autowired(required = false)
 	private JwtRequestFilter jwtRequestFilter;
 
 	
@@ -41,8 +41,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 				.antMatchers("/resources/**","/webjars/**","/h2-console/**").permitAll()
-				.antMatchers(HttpMethod.GET, "/","/oups").permitAll()
-				.antMatchers("/api/**").permitAll()
+				.antMatchers(HttpMethod.GET, "/","/oups").permitAll()				
+				.antMatchers("/authenticate","/login").permitAll()
+				.antMatchers("/api/**").hasAnyAuthority("admin")
 				.antMatchers("/swagger-ui.html","/v3/**","/swagger-ui/**").permitAll()
 				.antMatchers("/users/new").permitAll()				
 				.antMatchers("/logging", "/actuator/**").permitAll()
@@ -53,8 +54,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/bills/**").authenticated()
 				.anyRequest().denyAll()
 				.and()
-				 	.formLogin()
-				 	/*.loginPage("/login")*/
+				 	.formLogin()				 	
 				 	.failureUrl("/login-error")
 				.and()
 					.logout()
@@ -63,10 +63,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 // de la BD H2 (deshabilitar las cabeceras de protección contra
                 // ataques de tipo csrf y habilitar los framesets si su contenido
                 // se sirve desde esta misma página.
-                http.csrf().ignoringAntMatchers("/h2-console/**","/actuator/**","/api/**");
-                http.headers().frameOptions().sameOrigin();
                 
-                http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+                http.headers().frameOptions().sameOrigin();
+                if(jwtRequestFilter!=null)
+                	http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+				http.csrf().disable();
+				//http.exceptionHandling().authenticationEntryPoint(new Http403ForbiddenEntryPoint());
 	}
 
 	@Override

@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.service.JwtUserDetailsService;
 import org.springframework.samples.petclinic.util.JwtTokenUtil;
-import org.springframework.samples.petclinic.util.JwtUserDetailsService;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,15 +22,16 @@ import io.jsonwebtoken.ExpiredJwtException;
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
 
-	@Autowired
+	@Autowired(required = false)
 	private JwtUserDetailsService jwtUserDetailsService;
 
-	@Autowired
+	@Autowired(required = false)
 	private JwtTokenUtil jwtTokenUtil;
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
-
+		if(jwtUserDetailsService==null || jwtTokenUtil==null)
+			return;
 		final String requestTokenHeader = request.getHeader("Authorization");
 		String username = null;
 		String jwtToken = null;

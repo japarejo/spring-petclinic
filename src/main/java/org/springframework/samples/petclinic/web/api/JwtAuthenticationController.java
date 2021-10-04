@@ -11,6 +11,7 @@ import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,7 +27,7 @@ public class JwtAuthenticationController {
 	@Autowired
 	private JwtTokenUtil jwtTokenUtil;
 
-	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
+	@PostMapping(path = "/authenticate",consumes = "application/json")
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
 
 		Authentication authentication=authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());		

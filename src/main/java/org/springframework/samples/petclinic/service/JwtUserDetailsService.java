@@ -1,4 +1,4 @@
-package org.springframework.samples.petclinic.util;
+package org.springframework.samples.petclinic.service;
 
 import java.util.ArrayList;
 import java.util.List;

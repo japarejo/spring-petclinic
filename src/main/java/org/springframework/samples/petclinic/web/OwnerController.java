@@ -61,10 +61,11 @@ public class OwnerController {
 	}
 
 	@GetMapping(value = "/owners/new")
-	public String initCreationForm(Map<String, Object> model) {
+	public ModelAndView initCreationForm() {
+		ModelAndView result=new ModelAndView(VIEWS_OWNER_CREATE_OR_UPDATE_FORM);
 		Owner owner = new Owner();
-		model.put("owner", owner);
-		return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
+		result.addObject("owner", owner);
+		return  result;
 	}
 
 	@PostMapping(value = "/owners/new")

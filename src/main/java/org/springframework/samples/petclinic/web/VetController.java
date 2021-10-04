@@ -21,6 +21,7 @@ import org.springframework.samples.petclinic.service.VetService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Map;
 
@@ -41,17 +42,18 @@ public class VetController {
 	}
 
 	@GetMapping(value = { "/vets" })
-	public String showVetList(Map<String, Object> model) {
+	public ModelAndView showVetList() {
 		// Here we are returning an object of type 'Vets' rather than a collection of Vet
 		// objects
 		// so it is simpler for Object-Xml mapping
 		Vets vets = new Vets();
 		vets.getVetList().addAll(this.vetService.findVets());
-		model.put("vets", vets);
-		return "vets/vetList";
+		ModelAndView result=new ModelAndView("vets/vetList");
+		result.addObject("vets", vets);
+		return result;
 	}
 
-	@GetMapping(value = { "/vets.xml"})
+	@GetMapping(value = { "/vets.xml"},produces="application/xml")
 	public @ResponseBody Vets showResourcesVetList() {
 		// Here we are returning an object of type 'Vets' rather than a collection of Vet
 		// objects
