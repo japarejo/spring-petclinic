@@ -14,7 +14,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.http.HttpStatus;
 import org.springframework.samples.petclinic.model.Bill;
+import org.springframework.samples.petclinic.util.JwtRequest;
+import org.springframework.samples.petclinic.util.JwtResponse;
 import org.springframework.samples.petclinic.web.api.client.BillApiFeign;
+import org.springframework.web.client.RestTemplate;
 
 import feign.FeignException;
 
@@ -27,7 +30,12 @@ public class BillApiTestWithFeign {
 	@Test
 	public void testGetAll()
 	{
-		List<Bill> bills=billApi.getAllBills();
+		RestTemplate temp=new RestTemplate();
+		JwtRequest request=new JwtRequest();
+		request.setUsername("admin1");
+		request.setPassword("4dm1n");
+		JwtResponse response=temp.postForObject("http://localhost:8080/authenticate", request,JwtResponse.class);
+		List<Bill> bills=billApi.getAllBills("Bearer "+response.getToken());
 		assertNotNull(bills);
 		assertFalse(bills.isEmpty());
 	}

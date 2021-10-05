@@ -22,7 +22,7 @@ public class GooglePlacesApiTest {
 	
 	@Test
 	public void testSearchNearby() {
-		/*String location="37.3562552%2C-5.9858614"; // Reina Mercedes
+		String location="37.3562552%2C-5.9858614"; // Reina Mercedes
 		String keyword="tapas";
 		String type="restaurant";
 		PlacesSearch searchResults=googlePlaces.search(key, location, keyword, 500, type);
@@ -31,6 +31,6 @@ public class GooglePlacesApiTest {
 		assertFalse(searchResults.getResults().isEmpty());
 		for(Place p:searchResults.getResults())
 			System.out.println(p.getName());
-			*/
+			
 	}
 }
