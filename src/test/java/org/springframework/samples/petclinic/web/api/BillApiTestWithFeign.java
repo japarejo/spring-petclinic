@@ -8,6 +8,8 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.List;
 
+import org.junit.Before;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,22 +29,33 @@ public class BillApiTestWithFeign {
 	@Autowired
 	BillApiFeign billApi;
 	
+	String tokenHeader;
+	
+	
+	public  String generateToken() {
+		if(tokenHeader==null) {
+			RestTemplate temp=new RestTemplate();
+			JwtRequest request=new JwtRequest();
+			request.setUsername("admin1");
+			request.setPassword("4dm1n");
+			JwtResponse response=temp.postForObject("http://localhost:8080/authenticate", request,JwtResponse.class);
+			tokenHeader="Bearer "+response.getToken();
+		}
+		return tokenHeader;
+	}
+	
 	@Test
 	public void testGetAll()
 	{
-		RestTemplate temp=new RestTemplate();
-		JwtRequest request=new JwtRequest();
-		request.setUsername("admin1");
-		request.setPassword("4dm1n");
-		JwtResponse response=temp.postForObject("http://localhost:8080/authenticate", request,JwtResponse.class);
-		List<Bill> bills=billApi.getAllBills("Bearer "+response.getToken());
+			
+		List<Bill> bills=billApi.getAllBills(generateToken());
 		assertNotNull(bills);
 		assertFalse(bills.isEmpty());
 	}
 	
 	@Test
 	public void testGeById() {
-		Bill bill=billApi.findById(1);
+		Bill bill=billApi.findById(1,generateToken());
 		assertNotNull(bill);
 		assertEquals(bill.getId(),1);
 	}
@@ -52,10 +65,10 @@ public class BillApiTestWithFeign {
 		Bill bill=new Bill();
 		bill.setAmount(20);
 		bill.setConcept("Rutinary visit for checking");
-		Bill created=billApi.createBill(bill);
+		Bill created=billApi.createBill(bill,generateToken());
 		assertNotNull(created);
 		assertNotNull(created.getId());
-		assertNotNull(billApi.findById(created.getId()));
+		assertNotNull(billApi.findById(created.getId(),generateToken()));
 	}
 	
 	@Test
@@ -66,8 +79,8 @@ public class BillApiTestWithFeign {
 		bill.setAmount(0);
 		bill.setConcept(concept);
 		bill.setId(id);
-		billApi.updateBill(id, bill);
-		Bill updated=billApi.findById(id);
+		billApi.updateBill(id, bill,generateToken());
+		Bill updated=billApi.findById(id,generateToken());
 		assertNotNull(updated);
 		assertEquals(updated.getAmount(),0);
 		assertEquals(updated.getConcept(),concept);
@@ -77,9 +90,9 @@ public class BillApiTestWithFeign {
 	@Test
 	public void testDeleteBill() {
 		int id=2;
-		billApi.deleteBill(id);
+		billApi.deleteBill(id,generateToken());
 		try {
-			Bill b=billApi.findById(id);
+			Bill b=billApi.findById(id,tokenHeader);
 			fail("The previous call should have raised an exception!");
 		}catch(FeignException fe) {
 			assertEquals(fe.status(),HttpStatus.NOT_FOUND.value());

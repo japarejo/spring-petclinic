@@ -27,14 +27,14 @@ public interface BillApiFeign {
 	List<Bill> getAllBills(@RequestHeader(value = "Authorization", required = true) String token);
 	
 	@GetMapping(value = "/{id}")
-	public Bill findById(@PathVariable("id") Integer id);
+	public Bill findById(@PathVariable("id") Integer id, @RequestHeader(value = "Authorization", required = true) String token);
 	
 	@PostMapping(consumes = "application/json")
-	public Bill createBill(Bill newBill);
+	public Bill createBill(Bill newBill,@RequestHeader(value = "Authorization", required = true) String token);
 	
 	@PutMapping(value="/{id}", consumes = "application/json")
-	public void updateBill(@PathVariable("id") Integer id, Bill updatedBill);
+	public void updateBill(@PathVariable("id") Integer id, Bill updatedBill, @RequestHeader(value = "Authorization", required = true) String token);
 	
 	@DeleteMapping("/{id}")
-	public void deleteBill(@PathVariable("id") Integer id);
+	public void deleteBill(@PathVariable("id") Integer id, @RequestHeader(value = "Authorization", required = true) String token);
 }
