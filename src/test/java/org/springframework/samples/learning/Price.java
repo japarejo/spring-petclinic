@@ -1,12 +1,8 @@
 package org.springframework.samples.learning;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+
+
 public class Price {
     private int price = 0;
 
@@ -16,5 +12,23 @@ public class Price {
 
 	public int getAmount() {
 		return price;
+				
 	}
+	
+	public Price() {}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
+	public Price(int price) {
+		super();
+		this.price = price;
+	}
+	
+	
 }
