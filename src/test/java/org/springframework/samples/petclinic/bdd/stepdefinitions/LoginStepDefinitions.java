@@ -61,7 +61,7 @@ public class LoginStepDefinitions extends AbstractStep {
 	@Then("{string} appears as the current user")
 	public void asCurretUserAppears(String username) throws Exception {		
 		assertEquals(username.toUpperCase(),
-				getDriver().findElement(By.xpath("//div[@id='main-navbar']/ul[2]/li/a/strong")).getText());
+				getDriver().findElement(By.xpath("//div[@id='main-navbar']/ul[2]/li/a/strong")).getText().toUpperCase());
 		stopDriver();
 	}
 	
