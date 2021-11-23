@@ -29,6 +29,8 @@ public class LoginUITest {
   public void setUp() throws Exception {
 	//String pathToGeckoDriver="C:\\Users\\japar\\Downloads"; 
 	//System.setProperty("webdriver.gecko.driver", pathToGeckoDriver + "\\geckodriver.exe");
+	String pathToGeckoDriver=".\\src\\test\\resources";
+	System.setProperty("webdriver.gecko.driver", pathToGeckoDriver + "\\geckodriver.exe");
     driver = new FirefoxDriver();
     baseUrl = "https://www.google.com/";
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -42,7 +44,7 @@ public class LoginUITest {
   }
 
   private void thenISeeMyUsernameInTheMenuBar() {
-	  assertEquals(username.toUpperCase(), driver.findElement(By.xpath("//div[@id='main-navbar']/ul[2]/li/a/strong")).getText());
+	  assertEquals(username.toUpperCase(), driver.findElement(By.xpath("//div[@id='main-navbar']/ul[2]/li/a/strong")).getText().toUpperCase());
 	
   }
 
