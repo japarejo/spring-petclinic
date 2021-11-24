@@ -48,6 +48,8 @@ import org.springframework.test.web.servlet.MockMvc;
  *
  * @author Colin But
  */
+
+// CONFIGURACIÓN:
 @WebMvcTest(value = PetController.class,
 		includeFilters = @ComponentScan.Filter(value = PetTypeFormatter.class, type = FilterType.ASSIGNABLE_TYPE),
 		excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = WebSecurityConfigurer.class),
@@ -57,7 +59,7 @@ class PetControllerTests {
 	private static final int TEST_OWNER_ID = 1;
 
 	private static final int TEST_PET_ID = 1;
-
+	//CONFIGURACIÓN:
 	@MockBean
 	private PetService petService;
         
@@ -69,6 +71,7 @@ class PetControllerTests {
 
 	@BeforeEach
 	void setup() {
+		// CONFIGURACIÓN:
 		PetType cat = new PetType();
 		cat.setId(3);
 		cat.setName("hamster");
@@ -80,8 +83,13 @@ class PetControllerTests {
 	@WithMockUser(value = "spring")
         @Test
 	void testInitCreationForm() throws Exception {
-		mockMvc.perform(get("/owners/{ownerId}/pets/new", TEST_OWNER_ID)).andExpect(status().isOk())
-				.andExpect(view().name("pets/createOrUpdatePetForm")).andExpect(model().attributeExists("pet"));
+		
+		// INVOCACIÓN:
+		mockMvc.perform(get("/owners/{ownerId}/pets/new", TEST_OWNER_ID))
+				// COMPROBACIONES:
+				.andExpect(status().isOk())
+				.andExpect(view().name("pets/createOrUpdatePetForm"))
+				.andExpect(model().attributeExists("pet"));
 	}
 
 	@WithMockUser(value = "spring")
