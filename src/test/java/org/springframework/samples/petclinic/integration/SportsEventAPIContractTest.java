@@ -18,11 +18,9 @@ import org.springframework.samples.petclinic.model.Odd;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import io.restassured.http.ContentType;
-import lombok.extern.java.Log;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment=WebEnvironment.RANDOM_PORT)
-@Log
 public class SportsEventAPIContractTest {
 	@LocalServerPort
 	private int port;

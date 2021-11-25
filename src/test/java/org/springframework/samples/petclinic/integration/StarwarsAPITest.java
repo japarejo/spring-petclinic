@@ -9,9 +9,8 @@ import java.util.concurrent.TimeUnit;
 
 import org.junit.jupiter.api.Test;
 
-import lombok.extern.java.Log;
 
-@Log
+
 public class StarwarsAPITest {
 	@Test
 	public void lukeSkywalkerIsPeople1() {
