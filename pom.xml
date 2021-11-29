@@ -191,11 +191,11 @@
 			<version>4.0.36</version>
 		</dependency>
 
-		<!-- Development tools -->
+		<!-- Development tools >
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-		</dependency>
+		</dependency-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>

@@ -13,9 +13,7 @@ import org.springframework.boot.web.server.LocalServerPort;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import lombok.extern.java.Log;
 
-@Log
 public class PetManagementStepDefinitions extends AbstractStep {
 	
 	@LocalServerPort
