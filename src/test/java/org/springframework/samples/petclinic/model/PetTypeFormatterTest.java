@@ -48,6 +48,12 @@ public class PetTypeFormatterTest {
 			public Pet findById(int id) throws DataAccessException {
 				return null;
 			}
+
+			@Override
+			public List<Pet> findByName(String name) throws DataAccessException {
+				// TODO Auto-generated method stub
+				return null;
+			}
 		};
 		ps=new PetService(pr,null);
 		sut = new PetTypeFormatter(ps);
