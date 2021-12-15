@@ -59,7 +59,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 class ParameterizedTests {         
 
 	@ParameterizedTest 
-	@ValueSource(ints = { 1, 2, 5, 9, 10 }) 
+	@ValueSource(ints = { 1, 2, 5, 9, 10}) 
 	void positiveTestWithValueSource(int argument) {    
 	        assertTrue(argument > 0 && argument < 11); 
 	} 
