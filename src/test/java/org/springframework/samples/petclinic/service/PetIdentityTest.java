@@ -75,15 +75,9 @@ public class PetIdentityTest {
 		Pet donatello2 = new Pet();
 		donatello2.setName("Donatello");
 		owner.addPet(donatello2);
-		// Ejecución y Comprobación:
-		/*
-		 * assertThrows(DuplicatedPetNameException.class, () ->
-		 * petService.savePet(donatello2)); List<Pet>
-		 * pets=petService.findPetsByName(donatello.getName());
-		 * assertEquals(1,pets.size());
-		 */
-
-	}
+		assertThrows(DuplicatedPetNameException.class, () ->
+ 	    				petService.savePet(donatello2)); 
+	}		
 
 	// Grabar la misma mascota con el mismo nombre (una mascota que ya exista):
 	// No se debería lanzar la excepción y los cambios especificados deberían

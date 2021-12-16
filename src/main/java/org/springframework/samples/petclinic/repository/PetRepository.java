@@ -23,6 +23,7 @@ import org.springframework.data.repository.Repository;
 import org.springframework.samples.petclinic.model.BaseEntity;
 import org.springframework.samples.petclinic.model.Pet;
 import org.springframework.samples.petclinic.model.PetType;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Spring Data JPA specialization of the {@link PetRepository} interface
@@ -47,6 +48,8 @@ public interface PetRepository extends Repository<Pet, Integer> {
 	 */
 	Pet findById(int id) throws DataAccessException;
 	
+	@Transactional(readOnly = true)
+	@Query(value = "SELECT * FROM pets pet WHERE pet.name=:name",nativeQuery = true)
 	List<Pet> findByName(String name) throws DataAccessException;
 
 	/**

@@ -75,11 +75,12 @@ public class PetService {
                 petRepository.save(pet);                
 	}
 
-
+	@Transactional(readOnly = true)
 	public Collection<Visit> findVisitsByPetId(int petId) {
 		return visitRepository.findByPetId(petId);
 	}
 	
+	@Transactional(readOnly = true)
 	public List<Pet> findPetsByName(String name){
 		return petRepository.findByName(name);
 	}
