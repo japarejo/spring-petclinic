@@ -12,7 +12,6 @@
         <tr>
             <th>Concept</th>
             <th>Amount</th>
-            <th>Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -24,7 +23,6 @@
                 <td>                    
                    <c:out value="${bill.amount} "/>
                 </td>
-                <td><a href="/bills/delete/${bill.id}">Delete</a></td>
             </tr>
         </c:forEach>
         </tbody>
