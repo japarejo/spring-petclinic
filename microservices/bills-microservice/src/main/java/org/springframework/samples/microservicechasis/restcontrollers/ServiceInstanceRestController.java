@@ -25,7 +25,7 @@ class ServiceInstanceRestController {
 	}
 	
 
-	@Value("${user.role}")
+	@Value("${user.role:admin}")
     private String role;
 
     
